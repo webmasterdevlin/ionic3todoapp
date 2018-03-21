@@ -16,17 +16,21 @@
 
   <ion-list [reorder]="reorderIsEnabled" (ionItemReorder)="itemReordered($event)">
     <ion-item-sliding *ngFor="let todo of todos; let i = index">
-      <ion-item>{{todo}}</ion-item>
-      <ion-item-options slide="left">
+
+      <ion-item-options side="left">
         <button ion-button (click)="editTodo(i)">
-          <ion-icon name="trash"></ion-icon>
+          <ion-icon name="create"></ion-icon>
         </button>
       </ion-item-options>
-      <ion-item-options slide="right">
+
+      <ion-item>{{todo}}</ion-item>
+
+      <ion-item-options side="right">
         <button color="danger" ion-button (click)="archiveTodo(i)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
+
     </ion-item-sliding>
   </ion-list>
 

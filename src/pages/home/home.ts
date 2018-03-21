@@ -28,7 +28,7 @@ export class HomePage {
 
   archiveTodo(todoIndex) {
     this._todoProvider.archiveTodo(todoIndex);
-    console.log("archiveTodo:", todoIndex);
+    // console.log("archiveTodo:", todoIndex);
   }
 
   toggleReorder() {
@@ -43,10 +43,47 @@ export class HomePage {
     this.todos.splice($event, 0);
   }
 
+
   goToArchivePage(index) {
     this.navCtrl.push(this.archivedTodosPage);
   }
 
+  editTodo(todoIndex){
+    let editTodoAlert = this._alertController.create({
+      title: "Edit A Todo",
+      message: "Edit Your Todo",
+      inputs: [
+        {
+          type: "text",
+          name: "editTodoInput",
+          value: this.todos[todoIndex]
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel"
+        },
+        {
+          text: "Edit Todo",
+          handler: (inputData)=> {
+            let todoText;
+            todoText = inputData.editTodoInput;
+            this._todoProvider.editTodo(todoText, todoIndex);
+
+            editTodoAlert.onDidDismiss(()=> {
+                  let editTodoToast = this._toastController.create({
+                  message: "Todo Edited",
+                  duration: 2000
+                });
+                editTodoToast.present();
+            });
+
+          }
+        }
+      ]
+    });
+    editTodoAlert.present();
+  }
   openTodoAlert() {
     let addTodoAlert = this._alertController.create({
       title: "Add a todo",
