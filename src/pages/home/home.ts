@@ -28,7 +28,6 @@ export class HomePage {
 
   archiveTodo(todoIndex) {
     this._todoProvider.archiveTodo(todoIndex);
-    // console.log("archiveTodo:", todoIndex);
   }
 
   toggleReorder() {
